@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { trendTopics, scenarios, publishSchedule, tourCountries, socialAccounts, appSettings } from "@/db/schema";
 import { sql } from "drizzle-orm";
-
+export const dynamic = "force-dynamic";
 export async function POST() {
   try {
     // Create tables if not exist
