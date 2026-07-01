@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-orange: #FF6B35;
+  --color-brand-orange-light: #FF8F65;
+  --color-brand-orange-dark: #E55A25;
+  --color-brand-teal: #004E64;
+  --color-brand-teal-light: #007A8D;
+  --color-brand-teal-dark: #003544;
+  --color-brand-gold: #F7C948;
+  --color-brand-cream: #FFF8F0;
+  --color-brand-dark: #0A0A0A;
+  --color-brand-gray: #1A1A2E;
+  --font-display: 'Inter', system-ui, sans-serif;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.6); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-display);
+  background: var(--color-brand-dark);
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Safe area for notched phones */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Animations */
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+.animate-slide-in-left { animation: slide-in-left 0.6s ease-out forwards; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #FF6B35, #F7C948);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient border */
+.gradient-border {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #FF6B35, #004E64);
+  z-index: -1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0A0A0A; }
+::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 3px; }
+
+/* Mobile specific */
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Disable text selection on UI elements */
+  nav, header, button {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* Standalone PWA mode */
+@media (display-mode: standalone) {
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* Pull to refresh disable in PWA */
+html {
+  overscroll-behavior-y: contain;
+}
+
+/* Hide scrollbar but keep functionality on mobile */
+@media (max-width: 768px) {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Video hover effect */
+video {
+  cursor: pointer;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 107, 53, 0.3);
+  color: white;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid #FF6B35;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shift */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
